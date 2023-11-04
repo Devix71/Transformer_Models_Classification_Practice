@@ -20,6 +20,8 @@ After successfully implementing and fine-tuning the model to the Food-101 datase
 
 This shows that when given the testing image, the model believes that it contains a "beignets" with 13% probability. This may not seem like much at first glance, but when comparing with the 2nd most confident category of "prime_rib", which has just 2% confidence, it looks like the model is fairly certain (and correctly so) that the object in the image is a "beignets".
 
+## Adapting to the COCO Dataset
+
 Moving on, I have decided to adapt the ViT model to a binary-classification problem by fine-tuning it on the [Common Objects in Context (COCO) dataset](https://cocodataset.org/). To achieve this, I had to adapt the data preprocessing and dataloading parts of the original notebook. I achieved this by first identifying and selecting the images exhibiting the categories I was interested in classifying (cats and horses) from the COCO dataset. Once that was done, I split the data into training, testing, and validating sub-datasets based on an 80-10-10 ratio with 2640 total images in each category to avoid overfitting and to achieve as close to real-world performance as possible.
 
 The notebook containing the code is `Assignment2_CatsandHorses_COCO.ipynb`
@@ -32,9 +34,11 @@ After encoding the data and training the model on it, the end results were:
 
 Which shows a staggering overfitting on the 'horse' category, even if both the 'horse' and 'cat' categories were equally represented in the datasets. Not only that, but the object in the image belongs to the 'cat' category. The abysmal result may be a result of its training process or perhaps due to the small dataset (less than 3000 images for each category).
 
+## Implementing Multiclass Labeling
+
 Next, I tried to adapt the ViT model to do multiclass classification on the COCO dataset. This involved altering the data preprocessing steps by including more animal categories into the final datasets. Doing so led to encountering a challenge, namely the different numbers of images containing said objects. While the 'horse', 'cat', 'bird', and 'dog' had the necessary amount of images, the 'bear' and 'sheep' categories had around half or less than 2640 images. This shouldn't be a problem if the proportions are similar in the evaluation dataset, which they are due to the aforementioned splitting method.
 
-The code can be found in the notebook `Assignment2_CatsandHorses_COCO-MultiLabel.ipynb`
+The code can be found in the notebook `Assignment2_CatsandHorses_COCO-Multiclass.ipynb`
 
 After running the model on the new dataset, the results are:
 
@@ -51,7 +55,9 @@ After running the model on the new dataset, the results are:
 
 Compared to the previous binary classifier, the multiclass model shows slightly better performance while still misclassifying the object in the image as "bear." This is a surprising result, as it seems the model has placed a larger weight on the 'bear' category with a 37% confidence. Somehow the true label 'cat' is the third most probable choice with 18% confidence.
 
-I tried rechecking this with a classic CNN model to perform multiclass classification on the same dataset. The results weren't relevant:
+I tried rechecking this with a classic CNN model to perform multiclass classification on the same dataset. This involved changing the entire data preprocessing stage, where the data was selected for the aforementioned categories and split according to the 80-10-10 ratio. Next the model was adapted to deal with the new tensor dimensions in its 2 layers, both by hardcoding the padding to 1 and by hardcoding the output of the layer to 30000 features. Not only that but the loss function was changed to a cross-entropy loss as this is a multiclass classification model. The evaluation functions were replaced to reflect the new output, thus the evaluation output being a classification report and a confusion matrix.
+
+The results weren't relevant:
 
 The code can be checked here `Demo 1.2 - cats and horses - CNN-Multiclass.ipynb`
 
@@ -89,7 +95,7 @@ This data suggests that the model only took into account the 'cat' and 'horse' o
 Overall, my attempt to correctly adapt the models to the COCO dataset for both binary and multiclass classification has been an astounding failure. But this isn't a reason to give up as I have learned many things through these challenges and results.
 
 
-## Sidenote
+## Sidenote - Sequence Classification
 
 I have also played around with a more NLP oriented model, namely the Huggingface🤗 [Token classification](https://huggingface.co/docs/transformers/tasks/token_classification). This model uses the [DistilBERT](https://huggingface.co/distilbert-base-uncased) model in classifiying tokens, fine-tuned on the [WNUT 17](https://huggingface.co/datasets/wnut_17) dataset.
 
