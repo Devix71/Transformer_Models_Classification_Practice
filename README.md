@@ -2,6 +2,8 @@
 
 Within this repository, you can find my attempts to experiment, play, and alter the ViT transformer model.
 
+The checkpoint files for the models mentioned later on can be found here `https://mega.nz/folder/FDg2ACyZ#-LMMAlSmCyL0JsuiEaZ1lQ`
+
 Initially, I started by following the Huggingface🤗 tutorial on [image classification](https://huggingface.co/docs/transformers/tasks/image_classification). This tutorial focuses on creating a [Vision Transformer (ViT) model](https://huggingface.co/docs/transformers/model_doc/vit) with the express purpose of correctly classifying specified objects within the [Food-101 Huggingface dataset](https://huggingface.co/datasets/food101).
 
 The notebook containing this attempt is called `Assignment2_CatsandHorses_Original.ipynb`.
