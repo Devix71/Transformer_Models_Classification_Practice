@@ -61,7 +61,7 @@ The results weren't relevant:
 
 The code can be checked here `Demo 1.2 - cats and horses - CNN-Multiclass.ipynb`
 
-# Classification Report
+### Classification Report
 
            precision    recall  f1-score   support
 
@@ -77,7 +77,7 @@ macro avg      0.07      0.17      0.09      2378
 weighted avg   0.09      0.21      0.12      2378
 
 
-# Confusion Matrix
+### Confusion Matrix
 
        cat    horse  dog  sheep  bird  bear
 cat    381     119   0     0     0       0
