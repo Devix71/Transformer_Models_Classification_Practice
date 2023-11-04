@@ -62,7 +62,7 @@ The results weren't relevant:
 The code can be checked here `Demo 1.2 - cats and horses - CNN-Multiclass.ipynb`
 
 ### Classification Report
-
+```
            precision    recall  f1-score   support
 
      cat       0.22      0.76      0.34       500
@@ -75,10 +75,10 @@ The code can be checked here `Demo 1.2 - cats and horses - CNN-Multiclass.ipynb`
 accuracy                           0.21      2378
 macro avg      0.07      0.17      0.09      2378
 weighted avg   0.09      0.21      0.12      2378
-
+```
 
 ### Confusion Matrix
-
+```
        cat    horse  dog  sheep  bird  bear
 cat    381     119   0     0     0       0
 horse  380     120   0     0     0       0
@@ -86,7 +86,7 @@ dog    322     118   0     0     0       0
 sheep  233      73   0     0     0       0
 bird   305     135   0     0     0       0
 bear   124      68   0     0     0       0
-
+```
 
 This data suggests that the model only took into account the 'cat' and 'horse' objects for some reason.
 
